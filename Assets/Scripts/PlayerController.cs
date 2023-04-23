@@ -5,12 +5,6 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5.00f;
     private float[] speedMultipliers = { 1.0f, 2.0f, 4.0f };
     private int currentSpeedIndex = 0;
-    private SpriteRenderer[] spriteRenderers;
-
-    void Start()
-    {
-        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
-    }
     
     void Update()
     {
@@ -50,7 +44,9 @@ public class PlayerController : MonoBehaviour
     
     void ChangeColor()
     {
-        foreach (SpriteRenderer sr in spriteRenderers)
+        var spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+        
+        foreach (var sr in spriteRenderers)
         {
             sr.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));;
         }
