@@ -1,21 +1,24 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerBehaviourScript : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5.00f;
     private float[] speedMultipliers = { 1.0f, 2.0f, 4.0f };
-    private int currentSpeedIndex = 0;   
-    
-    // Start is called before the first frame update
+    private int currentSpeedIndex = 0;
+    private SpriteRenderer[] spriteRenderers;
+
     void Start()
     {
-        
+        spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
+    }
+    
+    void Update()
+    {
+        Move();
+        HandleColorChange();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Move()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
@@ -35,5 +38,21 @@ public class PlayerBehaviourScript : MonoBehaviour
         upMovement *= speedMultiplier;
 
         transform.position += rightMovement + upMovement;
+    }
+
+    void HandleColorChange()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            ChangeColor();
+        }
+    }
+    
+    void ChangeColor()
+    {
+        foreach (SpriteRenderer sr in spriteRenderers)
+        {
+            sr.color = new Color(Random.Range(0f, 1f), Random.Range(0f, 1f), Random.Range(0f, 1f));;
+        }
     }
 }
