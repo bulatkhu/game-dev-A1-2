@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         Vector3 upMovement = new Vector3(0f, moveVertical, 0f) * moveSpeed * Time.deltaTime;
 
         // Check if the Shift key is held down
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
             currentSpeedIndex = (currentSpeedIndex + 1) % speedMultipliers.Length;
         }
