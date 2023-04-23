@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerBehaviourScript : MonoBehaviour
 {
     public float moveSpeed = 5.00f;
-    public float speedMultiplier = 2.0f;
+    private float[] speedMultipliers = { 1.0f, 2.0f, 4.0f };
+    private int currentSpeedIndex = 0;   
     
     // Start is called before the first frame update
     void Start()
@@ -25,9 +26,13 @@ public class PlayerBehaviourScript : MonoBehaviour
         // Check if the Shift key is held down
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            rightMovement *= speedMultiplier;
-            upMovement *= speedMultiplier;
+            currentSpeedIndex = (currentSpeedIndex + 1) % speedMultipliers.Length;
         }
+        
+        float speedMultiplier = speedMultipliers[currentSpeedIndex];
+        
+        rightMovement *= speedMultiplier;
+        upMovement *= speedMultiplier;
 
         transform.position += rightMovement + upMovement;
     }
