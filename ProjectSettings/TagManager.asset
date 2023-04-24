@@ -47,3 +47,6 @@ TagManager:
   - name: body
     uniqueID: 3467036007
     locked: 0
+  - name: highest
+    uniqueID: 3286694117
+    locked: 0
